@@ -1,0 +1,34 @@
+{
+  "compilerOptions": {
+    "target": "ES2022",
+    "module": "CommonJS",
+    "outDir": "lib",
+    "baseUrl": "src",
+    "moduleResolution": "Node",
+    "paths": {
+      "@pipes": [
+        "pipes"
+      ],
+      "@decorators": [
+        "decorators"
+      ],
+      "@interfaces": [
+        "interfaces"
+      ],
+      "@validators": [
+        "validators"
+      ]
+    },
+    "strict": true,
+    "declaration": true,
+    "skipLibCheck": true,
+    "removeComments": true,
+    "esModuleInterop": true,
+    "isolatedModules": true,
+    "strictNullChecks": false,
+    "emitDecoratorMetadata": true,
+    "experimentalDecorators": true,
+    "allowSyntheticDefaultImports": true,
+    "forceConsistentCasingInFileNames": true
+  }
+}

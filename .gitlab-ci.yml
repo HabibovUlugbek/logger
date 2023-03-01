@@ -1,0 +1,17 @@
+image: node:18.14.2-alpine
+
+stages:
+  - publish
+
+publish:
+  tags:
+    - common_package
+  stage: publish
+  rules:
+    - if: $CI_COMMIT_BRANCH == $CI_DEFAULT_BRANCH
+  script:
+    - npm install
+    - npm run build
+    - npm publish
+  before_script:
+    - echo "//registry.npmjs.org/:_authToken=${NPM_TOKEN}" > .npmrc
