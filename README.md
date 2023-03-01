@@ -1,10 +1,10 @@
-# Validator
+# Validator for NestJS
 
-## Disclaimer
+### Disclaimer
 
 This is a **private package**, you need an **access token** to install this package. Please contact [me](https://t.me/iaxel) to get an access token.
 
-## Before installation
+### Before installation
 
 To install this package, run the following commands:
 
