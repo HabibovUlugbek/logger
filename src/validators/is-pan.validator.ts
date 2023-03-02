@@ -3,6 +3,12 @@ export const isPan = (value: unknown): boolean => {
     return false
   }
 
+  const check = /^[0-9]{16}$/
+
+  if (!check.test(value)) {
+    return false
+  }
+
   const digits: number[] = value
     .split('')
     .reverse()
