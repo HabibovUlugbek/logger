@@ -9,7 +9,7 @@
     "name": "Tune Consulting",
     "email": "info@tuneconsulting.net"
   },
-  "version": "1.0.1",
+  "version": "1.0.2",
   "license": "MIT",
   "keywords": [
     "nestjs",
@@ -41,8 +41,8 @@
   },
   "devDependencies": {
     "@nestjs/common": "^9.3.9",
-    "@sello-lab/exceptions": "^1.0.1",
-    "@types/node": "^18.14.2",
+    "@sello-lab/exceptions": "^1.0.2",
+    "@types/node": "^18.14.3",
     "@typescript-eslint/eslint-plugin": "^5.54.0",
     "@typescript-eslint/parser": "^5.54.0",
     "class-validator": "^0.14.0",
@@ -52,13 +52,13 @@
     "eslint-plugin-prettier": "^4.2.1",
     "prettier": "^2.8.4",
     "reflect-metadata": "^0.1.13",
-    "rimraf": "^4.1.2",
+    "rimraf": "^4.1.3",
     "tsc-alias": "^1.8.2",
     "typescript": "^4.9.5"
   },
   "peerDependencies": {
     "@nestjs/common": "^9.3.9",
-    "@sello-lab/exceptions": "^1.0.1",
+    "@sello-lab/exceptions": "^1.0.2",
     "class-validator": "^0.14.0",
     "date-fns": "^2.29.3",
     "reflect-metadata": "^0.1.13"

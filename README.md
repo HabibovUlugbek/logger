@@ -15,7 +15,13 @@ $ echo "//registry.npmjs.org/:_authToken=<ACCESS_TOKEN>" > .npmrc
 ## Installation
 
 ```bash
-$ npm install --save @sello-lab/validator
+$ npm install --save @sello-lab/validator class-validator date-fns reflect-metadata
+```
+
+If you want to use `GlobalValidationPipe`, you must install additional packages:
+
+```bash
+$ npm install --save @nestjs/common @sello-lab/exceptions
 ```
 
 ## Getting started
