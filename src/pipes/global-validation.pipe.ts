@@ -1,5 +1,5 @@
-import { ValidationPipe } from '@nestjs/common'
 import type { ValidationError, ValidationPipeOptions } from '@nestjs/common'
+import { ValidationPipe } from '@nestjs/common'
 import { UnprocessableEntityException } from '@sello-lab/exceptions'
 
 export class GlobalValidationPipe extends ValidationPipe {
