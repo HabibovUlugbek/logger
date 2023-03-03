@@ -15,7 +15,7 @@ export const isPan = (value: unknown): boolean => {
     .map((digit: string): number => Number(digit))
 
   const checksum: number = digits.reduce(
-    (prev: number, curr: number, index: number) =>
+    (prev: number, curr: number, index: number): number =>
       index % 2 !== 0 ? prev + ((curr *= 2) > 9 ? curr - 9 : curr) : prev + curr,
     0,
   )
