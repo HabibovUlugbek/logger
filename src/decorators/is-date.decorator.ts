@@ -1,7 +1,7 @@
-import { ValidateBy, buildMessage } from 'class-validator'
 import type { ValidationOptions, ValidationArguments } from 'class-validator'
-import type { IsDateOptions } from '@interfaces'
+import { ValidateBy, buildMessage } from 'class-validator'
 import { isDate } from '@validators'
+import type { IsDateOptions } from '@interfaces'
 
 export const IsDate = (options?: IsDateOptions, validationOptions?: ValidationOptions): PropertyDecorator =>
   ValidateBy({
