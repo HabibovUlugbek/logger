@@ -8,7 +8,7 @@ export const isDate = (value: unknown, options?: IsDateOptions): boolean => {
     return false
   }
 
-  if (options && options.format) {
+  if (options?.format) {
     return parse(value, options.format, date).toString() !== 'Invalid Date'
   }
 
