@@ -16,89 +16,63 @@ $ echo "//registry.npmjs.org/:_authToken=<ACCESS_TOKEN>" > .npmrc
 ## Installation
 
 ```bash
-$ npm install --save @sello-lab/logger  reflect-metadata
+$ npm install --save @habibovulugbek/logger  reflect-metadata
 ```
 
 If you want to use `Logger`, you must install additional packages:
 
 ```bash
-$ npm install --save @nestjs/common @habibov/logger
+$ npm install --save @nestjs/common @habibovulugbek/logger
 ```
 
 ## Getting started
 
-### GlobalValidationPipe
+### HttpLoggerMiddleware
 
-You can use `GlobalValidationPipe` in your `main.ts` file to validate all incoming requests.
+You can use `HttpLoggerMiddleware` in your `app.module.ts` file to validate all incoming requests.
 
 ```ts
-// main.ts
-import { NestFactory } from '@nestjs/core'
-import { GlobalValidationPipe } from '@sello-lab/validator'
-import { AppModule } from './app.module'
+// app.module.ts
+import { Module, NestModule, MiddlewareConsumer } from '@nestjs/common'
+import { HttpLoggerMiddleware } from '@habibovulugbek/logger'
+import { AppController } from './app.controller'
+import { AppService } from './app.service'
 
-setImmediate(async (): Promise<void> => {
-  const app = await NestFactory.create(AppModule)
-
-  app.useGlobalPipes(
-    new GlobalValidationPipe({
-      transform: true,
-      whitelist: true,
-      stopAtFirstError: true,
-    }),
-  )
-
-  await app.listen(3000, '127.0.0.1')
+@Module({
+  imports: [],
+  controllers: [AppController],
+  providers: [AppService],
 })
-```
-
-### Decorators
-
-| Decorator                          | Description                                  |
-| ---------------------------------- | -------------------------------------------- |
-| `@IsPan()`                         | Checks if the value is a valid PAN number.   |
-| `@IsCode(options?: IsCodeOptions)` | Checks if the value is a valid code.         |
-| `@IsDate(options?: IsDateOptions)` | Checks if the value is a valid date.         |
-| `@IsPhone()`                       | Checks if the value is a valid phone number. |
-
-### Example
-
-```ts
-// card-create.dto.ts
-import { IsPan, IsCode, IsDate, IsPhone } from '@sello-lab/validator'
-
-export class CardCreateDto {
-  @IsPan()
-  pan: string
-
-  @IsCode({
-    type: 'number',
-    length: 3,
-  })
-  cvv: number
-
-  @IsDate({
-    format: 'MM/YY',
-  })
-  expiry: string
-
-  @IsPhone()
-  phone: string
-}
-```
-
-```ts
-// card.controller.ts
-import { Body, Post, Controller } from '@nestjs/common'
-import { CardCreateDto } from './card-create.dto'
-
-@Controller('card')
-export class CardController {
-  @Post()
-  create(@Body() card: CardCreateDto): CardCreateDto {
-    return card
+export class AppModule implements NestModule {
+  configure(consumer: MiddlewareConsumer) {
+    consumer.apply(HttpLoggerMiddleware).forRoutes('*')
   }
 }
+```
+
+### RpcLoggingInterceptor
+
+You can use `RpcLoggingInterceptor` in your `main.ts` file to validate all incoming requests.
+
+```ts
+//main.ts
+
+import { NestFactory } from '@nestjs/core'
+import { AppModule } from './app.module'
+import { RpcLoggingInterceptor } from '@habibovulugbek/logger'
+
+async function bootstrap() {
+  const app = await NestFactory.createMicroservice(AppModule, {
+    transport: Transport.TCP,
+    options: {
+      host: '127.0.0.1',
+      port: 3000,
+    },
+  })
+  app.useGlobalInterceptors(new RpcLoggingInterceptor())
+  await app.listenAsync()
+}
+bootstrap()
 ```
 
 Enjoy!
