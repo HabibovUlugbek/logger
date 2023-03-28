@@ -29,7 +29,7 @@ $ npm install --save @nestjs/common @habibovulugbek/logger
 
 ### HttpLoggerMiddleware
 
-You can use `HttpLoggerMiddleware` in your `app.module.ts` file to validate all incoming requests.
+You can use `HttpLoggerMiddleware` in your `app.module.ts` file to represent your request ans response.
 
 ```ts
 // app.module.ts
@@ -52,7 +52,7 @@ export class AppModule implements NestModule {
 
 ### RpcLoggingInterceptor
 
-You can use `RpcLoggingInterceptor` in your `main.ts` file to validate all incoming requests.
+You can use `RpcLoggingInterceptor` in your `main.ts` file to represent your request ans response.
 
 ```ts
 //main.ts
