@@ -6,18 +6,9 @@
     "baseUrl": "src",
     "moduleResolution": "Node",
     "paths": {
-      "@pipes": [
-        "pipes"
+      "@middlewares": [
+        "middlewares"
       ],
-      "@decorators": [
-        "decorators"
-      ],
-      "@interfaces": [
-        "interfaces"
-      ],
-      "@validators": [
-        "validators"
-      ]
     },
     "strict": true,
     "declaration": true,

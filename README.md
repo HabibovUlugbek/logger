@@ -1,8 +1,9 @@
-# Validator for NestJS
+# Logger for NestJS
 
 ### Disclaimer
 
-This is a **private package**, you need an **access token** to install this package. Please contact [me](https://t.me/iaxel) to get an access token.
+This is a **private package**, you need an **access token** to install this package. Please contact
+[me](https://t.me/iaxel) to get an access token.
 
 ### Before installation
 
@@ -15,13 +16,13 @@ $ echo "//registry.npmjs.org/:_authToken=<ACCESS_TOKEN>" > .npmrc
 ## Installation
 
 ```bash
-$ npm install --save @sello-lab/validator class-validator date-fns reflect-metadata
+$ npm install --save @sello-lab/logger  reflect-metadata
 ```
 
-If you want to use `GlobalValidationPipe`, you must install additional packages:
+If you want to use `Logger`, you must install additional packages:
 
 ```bash
-$ npm install --save @nestjs/common @sello-lab/exceptions
+$ npm install --save @nestjs/common @habibov/logger
 ```
 
 ## Getting started
@@ -32,12 +33,12 @@ You can use `GlobalValidationPipe` in your `main.ts` file to validate all incomi
 
 ```ts
 // main.ts
-import { NestFactory } from '@nestjs/core';
-import { GlobalValidationPipe } from '@sello-lab/validator';
-import { AppModule } from './app.module';
+import { NestFactory } from '@nestjs/core'
+import { GlobalValidationPipe } from '@sello-lab/validator'
+import { AppModule } from './app.module'
 
 setImmediate(async (): Promise<void> => {
-  const app = await NestFactory.create(AppModule);
+  const app = await NestFactory.create(AppModule)
 
   app.useGlobalPipes(
     new GlobalValidationPipe({
@@ -45,16 +46,16 @@ setImmediate(async (): Promise<void> => {
       whitelist: true,
       stopAtFirstError: true,
     }),
-  );
+  )
 
-  await app.listen(3000, '127.0.0.1');
-});
+  await app.listen(3000, '127.0.0.1')
+})
 ```
 
 ### Decorators
 
 | Decorator                          | Description                                  |
-|------------------------------------|----------------------------------------------|
+| ---------------------------------- | -------------------------------------------- |
 | `@IsPan()`                         | Checks if the value is a valid PAN number.   |
 | `@IsCode(options?: IsCodeOptions)` | Checks if the value is a valid code.         |
 | `@IsDate(options?: IsDateOptions)` | Checks if the value is a valid date.         |
@@ -64,38 +65,38 @@ setImmediate(async (): Promise<void> => {
 
 ```ts
 // card-create.dto.ts
-import { IsPan, IsCode, IsDate, IsPhone } from '@sello-lab/validator';
+import { IsPan, IsCode, IsDate, IsPhone } from '@sello-lab/validator'
 
 export class CardCreateDto {
   @IsPan()
-  pan: string;
+  pan: string
 
   @IsCode({
     type: 'number',
     length: 3,
   })
-  cvv: number;
+  cvv: number
 
   @IsDate({
     format: 'MM/YY',
   })
-  expiry: string;
+  expiry: string
 
   @IsPhone()
-  phone: string;
+  phone: string
 }
 ```
 
 ```ts
 // card.controller.ts
-import { Body, Post, Controller } from '@nestjs/common';
-import { CardCreateDto } from './card-create.dto';
+import { Body, Post, Controller } from '@nestjs/common'
+import { CardCreateDto } from './card-create.dto'
 
 @Controller('card')
 export class CardController {
   @Post()
   create(@Body() card: CardCreateDto): CardCreateDto {
-    return card;
+    return card
   }
 }
 ```
