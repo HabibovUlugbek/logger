@@ -7,10 +7,11 @@ export class HttpLoggerInterceptor implements NestInterceptor {
   intercept(context: ExecutionContext, next: CallHandler): Observable<any> {
     const request = context.switchToHttp().getRequest()
     const { method, originalUrl, body } = request
+    const startTime = Date.now() / 1000
     return next.handle().pipe(
       tap((data) => {
         const { statusCode } = context.switchToHttp().getResponse()
-        const elapsedTime = Date.now() - request.startAt
+        const elapsedTime = Date.now() / 1000 - startTime
         const log = {
           method,
           originalUrl,
@@ -22,7 +23,7 @@ export class HttpLoggerInterceptor implements NestInterceptor {
         console.log(log)
       }),
       catchError((error) => {
-        const elapsedTime = Date.now() - request.startAt
+        const elapsedTime = Date.now() / 1000 - startTime
         const log = {
           method,
           originalUrl,

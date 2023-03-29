@@ -2,22 +2,10 @@
 
 ### Disclaimer
 
-This is a **private package**, you need an **access token** to install this package. Please contact
-[me](https://t.me/iaxel) to get an access token.
+<!-- This is a **private package**, you need an **access token** to install this package. Please contact
+[me](https://t.me/iaxel) to get an access token. -->
 
 ### Before installation
-
-To install this package, run the following commands:
-
-```bash
-$ echo "//registry.npmjs.org/:_authToken=<ACCESS_TOKEN>" > .npmrc
-```
-
-## Installation
-
-```bash
-$ npm install --save @habibovulugbek/logger  reflect-metadata
-```
 
 If you want to use `Logger`, you must install additional packages:
 
@@ -35,7 +23,7 @@ You can use `HttpLoggerInterceptor` in your `main.ts` file to represent your req
 // main.ts
 import { NestFactory } from '@nestjs/core'
 import { AppModule } from './app.module'
-import { RpcLoggingInterceptor } from '@habibovulugbek/logger'
+import { HttpLoggerInterceptor } from '@habibovulugbek/logger'
 
 async function bootstrap() {
   const app = await NestFactory.create(AppModule)
