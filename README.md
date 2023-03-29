@@ -29,24 +29,18 @@ $ npm install --save @nestjs/common @habibovulugbek/logger
 
 ### HttpLoggerMiddleware
 
-You can use `HttpLoggerMiddleware` in your `app.module.ts` file to represent your request ans response.
+You can use `HttpLoggerInterceptor` in your `main.ts` file to represent your request ans response.
 
 ```ts
-// app.module.ts
-import { Module, NestModule, MiddlewareConsumer } from '@nestjs/common'
-import { HttpLoggerMiddleware } from '@habibovulugbek/logger'
-import { AppController } from './app.controller'
-import { AppService } from './app.service'
+// main.ts
+import { NestFactory } from '@nestjs/core'
+import { AppModule } from './app.module'
+import { RpcLoggingInterceptor } from '@habibovulugbek/logger'
 
-@Module({
-  imports: [],
-  controllers: [AppController],
-  providers: [AppService],
-})
-export class AppModule implements NestModule {
-  configure(consumer: MiddlewareConsumer) {
-    consumer.apply(HttpLoggerMiddleware).forRoutes('*')
-  }
+async function bootstrap() {
+  const app = await NestFactory.create(AppModule)
+  app.useGlobalInterceptors(new HttpLoggerInterceptor())
+  await app.listen(3000)
 }
 ```
 
