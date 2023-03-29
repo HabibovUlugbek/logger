@@ -1,6 +1,6 @@
 # Logger for NestJS
 
-### Disclaimer
+<!-- ### Disclaimer -->
 
 <!-- This is a **private package**, you need an **access token** to install this package. Please contact
 [me](https://t.me/iaxel) to get an access token. -->
@@ -15,9 +15,9 @@ $ npm install --save @nestjs/common @habibovulugbek/logger
 
 ## Getting started
 
-### HttpLoggerMiddleware
+### HttpLoggerInterceptor
 
-You can use `HttpLoggerInterceptor` in your `main.ts` file to represent your request ans response.
+You can use `HttpLoggerInterceptor` in your `main.ts` file to represent your request and response.
 
 ```ts
 // main.ts
@@ -34,7 +34,7 @@ async function bootstrap() {
 
 ### RpcLoggingInterceptor
 
-You can use `RpcLoggingInterceptor` in your `main.ts` file to represent your request ans response.
+You can use `RpcLoggingInterceptor` in your `main.ts` file to represent your request and response.
 
 ```ts
 //main.ts

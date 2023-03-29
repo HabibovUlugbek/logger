@@ -1,37 +1,43 @@
-import { Injectable, NestInterceptor, ExecutionContext, CallHandler } from '@nestjs/common'
+import { Injectable, NestInterceptor, ExecutionContext, CallHandler, Logger } from '@nestjs/common'
 import { Observable } from 'rxjs'
 import { catchError, tap } from 'rxjs/operators'
 
 @Injectable()
 export class HttpLoggerInterceptor implements NestInterceptor {
+  private logger: Logger = new Logger('Logger')
+
   intercept(context: ExecutionContext, next: CallHandler): Observable<any> {
     const request = context.switchToHttp().getRequest()
     const { method, originalUrl, body } = request
-    const startTime = Date.now() / 1000
+    const startTime = Date.now()
     return next.handle().pipe(
       tap((data) => {
         const { statusCode } = context.switchToHttp().getResponse()
-        const elapsedTime = Date.now() / 1000 - startTime
-        const log = {
+        const elapsed = Date.now() - startTime
+        const logData = {
           method,
           originalUrl,
           body,
           statusCode,
           res: data,
-          elapsedTime,
+          begin_date: new Date(startTime).toISOString(),
+          end_date: new Date().toISOString(),
+          elapsed_time: `${elapsed}ms`,
         }
-        console.log(log)
+        this.logger.log(JSON.stringify(logData))
       }),
       catchError((error) => {
-        const elapsedTime = Date.now() / 1000 - startTime
-        const log = {
+        const elapsed = Date.now() - startTime
+        const logData = {
           method,
           originalUrl,
           body,
           res: error.message,
-          elapsedTime,
+          begin_date: new Date(startTime).toISOString(),
+          end_date: new Date().toISOString(),
+          elapsed_time: `${elapsed}ms`,
         }
-        console.log(log)
+        this.logger.log(JSON.stringify(logData))
         throw error
       }),
     )
